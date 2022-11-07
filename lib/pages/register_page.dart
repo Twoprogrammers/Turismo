@@ -108,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Image(image: AssetImage("assets/images/logo.png")),
+                      const Image(image: AssetImage("assets/images/viajar.png")),
                       const SizedBox(
                         height: 16.0,
                       ),

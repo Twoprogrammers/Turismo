@@ -4,6 +4,7 @@ import 'package:mi_musica/pages/home_page.dart';
 import 'package:mi_musica/pages/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user.dart';
+import 'Lista.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -44,7 +45,8 @@ class _LoginPageState extends State<LoginPage> {
     if (_email.text == userLoad.email && _password.text == userLoad.password){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
     } else {
-      _showMsg("Correo o Contraseña incorrecta");
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Lista()
+     ));
     }
   }
 
@@ -57,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Image(image: AssetImage("assets/images/logo.png")),
+                    const Image(image: AssetImage("assets/images/viajar.png")),
                     const SizedBox(height: 16.0,),
                     TextFormField(
                       controller: _email,
