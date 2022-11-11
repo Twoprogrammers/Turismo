@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:mi_musica/models/user.dart';
 import 'package:mi_musica/pages/login_page.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../repository/usuariofirebase.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -17,6 +20,8 @@ class RegisterPage extends StatefulWidget {
 enum Genre{ masculino, femenino}
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  UsuarioFirebase usuarioFirebase= UsuarioFirebase();
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -26,9 +31,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Genre? _genre = Genre.masculino;
 
-  bool _salsa = false;
-  bool _rancheras = false;
-  bool _rock = false;
+  bool _Europa = false;
+  bool _AmericaLatina = false;
+  bool _Asia = false;
 
   String buttonMsg = "Fecha de Nacimiento";
 
@@ -67,9 +72,9 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void saveUser(User user) async {
+  void saveUser(Usuario usuario) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("user", jsonEncode(user));
+    prefs.setString("usuario", jsonEncode(usuario));
   }
 
 
@@ -83,12 +88,12 @@ class _RegisterPageState extends State<RegisterPage> {
         genre = "Femenino";
       }
 
-      if (_salsa) favoritos = "$favoritos Salsa";
-      if (_rancheras) favoritos = "$favoritos Rancheras";
-      if (_rock) favoritos = "$favoritos Rock";
-      var user = User(
+      if (_Europa) favoritos = "$favoritos Salsa";
+      if (_AmericaLatina) favoritos = "$favoritos Rancheras";
+      if (_Asia) favoritos = "$favoritos Rock";
+      var usuario = Usuario(
           _name.text, _email.text, _password.text, genre, favoritos, _date);
-      saveUser(user);
+      saveUser(usuario);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
       } else {
         _showMsg("Las contraseñas deben de ser iguales");
@@ -179,36 +184,36 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         ),
                     const Text(
-                      "Género de Música Favorita",
+                      "Continente de interes",
                       style: TextStyle(fontSize: 20),
                     ),
                     CheckboxListTile(
-                      title:  const Text("Salsa"),
-                      value: _salsa,
-                      selected: _salsa,
+                      title:  const Text("Europa"),
+                      value: _Europa,
+                      selected: _Europa,
                       onChanged: (bool? value) {
                         setState(() {
-                          _salsa = value!;
+                          _Europa = value!;
                         });
                       },
                     ),
                     CheckboxListTile(
-                      title:  const Text("Rancheras"),
-                      value: _rancheras,
-                      selected: _rancheras,
+                      title:  const Text("America Latina"),
+                      value: _AmericaLatina,
+                      selected: _AmericaLatina,
                       onChanged: (bool? value) {
                         setState(() {
-                          _rancheras = value!;
+                          _AmericaLatina = value!;
                         });
                       },
                     ),
                     CheckboxListTile(
-                      title:  const Text("Rock"),
-                      value: _rock,
-                      selected: _rock,
+                      title:  const Text("Asia"),
+                      value: _Asia,
+                      selected: _Asia,
                       onChanged: (bool? value) {
                         setState(() {
-                          _rock = value!;
+                          _Asia = value!;
                         });
                       },
                     ),
@@ -226,7 +231,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextButton.styleFrom(
                         textStyle: const TextStyle(fontSize: 16),
                       ),
-                      onPressed: () {
+                      onPressed: () async{
+                        String usu= _email.text;
+                        String cla=_password.text;
+                        final datos= await usuarioFirebase.registrarusuario(usu, cla);
+                        if(datos=='ok'){
+                          Fluttertoast.showToast(msg: "datos registrados", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.TOP);
+                        }
                         _onRegisterButtonClicked();
 
                       },

@@ -1,4 +1,6 @@
-class User{
+import 'package:flutter/material.dart';
+
+class Usuario{
   var _name;
   var _email;
   var _password;
@@ -6,12 +8,12 @@ class User{
   var _favoritesGenres;
   var _bornDate;
 
-  User(this._name, this._email, this._password, this._genre,
+  Usuario(this._name, this._email, this._password, this._genre,
       this._favoritesGenres, this._bornDate);
 
-  User.Empty();
+  Usuario.Empty();
 
-  User.fromJson(Map<String, dynamic> json)
+  Usuario.fromJson(Map<String, dynamic> json)
       : _name = json["name"],
         _email = json["email"],
         _password = json["password"],

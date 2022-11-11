@@ -5,6 +5,9 @@ import 'package:mi_musica/pages/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user.dart';
 import 'Lista.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,10 +17,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  FirebaseAuth firebaseAuth=FirebaseAuth.instance;
   final _email = TextEditingController();
   final _password = TextEditingController();
+  String usu="";
+  String cla="";
 
-  User userLoad = User.Empty();
+  Usuario userLoad = Usuario.Empty();
 
   @override
   void initState(){
@@ -28,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   _getUser() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> userMap = jsonDecode(prefs.getString("user")!);
-    userLoad = User.fromJson(userMap);
+    userLoad = Usuario.fromJson(userMap);
 }
 
   void _showMsg(String msg){
@@ -41,12 +47,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _validateUser(){
-    if (_email.text == userLoad.email && _password.text == userLoad.password){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
-    } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>Lista()
-     ));
+  void _validateUser()async{
+    usu= _email.text;
+    cla= _password.text;
+    try {
+      final datos = await firebaseAuth.signInWithEmailAndPassword(
+          email: usu, password: cla);
+      print(datos);
+      if (datos != null) {
+        print(usu);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Lista())
+        );
+      }
+    }
+    catch(e){
+      Fluttertoast.showToast(msg: "datos incorrectos", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER);
     }
   }
 
@@ -76,13 +92,13 @@ class _LoginPageState extends State<LoginPage> {
                       decoration:  const InputDecoration(
                           border: OutlineInputBorder(), labelText: "Contraseña"
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                     const SizedBox(
                       height: 16.0,
                     ),
                     ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async{
                           _validateUser();
                         }, child: const Text("Iniciar Sesión")),
                     TextButton(
