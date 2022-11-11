@@ -23,7 +23,6 @@ class _ListaState extends State<Lista> {
               child: Text('LISTADO DE LUGARES', style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'titulo',
               ),),
             ),
             Container(
@@ -34,6 +33,7 @@ class _ListaState extends State<Lista> {
                 subtitle: Text('lugar turistico'),
                 leading: Icon(Icons.add_location_alt_rounded, color: Colors.black,),
               ),
+
             ),
             Container(
               color: Colors.white,

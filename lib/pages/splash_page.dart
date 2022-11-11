@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Image(image: AssetImage("assets/images/logo.png"),
+        child: Image(image: AssetImage("assets/images/viajar.png"),
         ),
       ),
     );
