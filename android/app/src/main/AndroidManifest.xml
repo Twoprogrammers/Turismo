@@ -4,6 +4,8 @@
         android:label="mi_musica"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDnjJxXa1_x_7s7hQ0gVsZvNL3SkiCj2Rw"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

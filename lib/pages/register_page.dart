@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:mi_musica/models/user.dart';
 import 'package:mi_musica/pages/login_page.dart';
-import '../repository/usuariofirebase.dart';
+import '../repository/usuarioFirebase.dart';
+
 
 
 class RegisterPage extends StatefulWidget {

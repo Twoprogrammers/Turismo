@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mi_musica/pages/home_page.dart';
 import 'package:mi_musica/pages/login_page.dart';
 
 import 'mi_sitios_page.dart';
@@ -26,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
             MaterialPageRoute(builder: (context) => const LoginPage()));
       } else {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const MySitePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
       }
     });
   }

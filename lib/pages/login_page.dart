@@ -5,9 +5,10 @@ import 'package:mi_musica/pages/home_page.dart';
 import 'package:mi_musica/pages/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user.dart';
-import '../repository/usuariofirebase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../repository/usuarioFirebase.dart';
 
 
 class LoginPage extends StatefulWidget {
