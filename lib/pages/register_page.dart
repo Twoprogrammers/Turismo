@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:mi_musica/models/user.dart';
 import 'package:mi_musica/pages/login_page.dart';
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../repository/usuariofirebase.dart';
 
 
@@ -21,7 +17,8 @@ enum Genre{ masculino, femenino}
 
 class _RegisterPageState extends State<RegisterPage> {
 
-  UsuarioFirebase usuarioFirebase= UsuarioFirebase();
+  final UsuarioFirebase _usuarioFirebase = UsuarioFirebase();
+
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -72,11 +69,32 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void saveUser(Usuario usuario) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("usuario", jsonEncode(usuario));
+  void _saveUser(Usuario user) async {
+    var result = await _usuarioFirebase.crearUsuario(user);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
   }
 
+  void _registerUser(Usuario user) async {
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.setString("user", jsonEncode(user));
+    var result = await _usuarioFirebase.registrarUsuario(user.email, user.password);
+    String msg = "";
+    if (result == "invalid-email") {
+      msg = "El correo electónico está mal escrito";
+    } else if (result == "weak-password") {
+      msg = "La contrasena debe tener minimo 6 digitos";
+    } else if (result == "email-already-in-use") {
+      msg = "Ya existe una cuenta con ese correo electronico";
+    } else if (result == "network-request-failed") {
+      msg = "Revise su conexion a internet";
+    } else {
+      msg = "Usuario registrado con exito";
+      user.uid = result;
+      _saveUser(user);
+    }
+    _showMsg(msg);
+  }
 
   void _onRegisterButtonClicked() {
     setState(() {
@@ -88,18 +106,15 @@ class _RegisterPageState extends State<RegisterPage> {
         genre = "Femenino";
       }
 
-      if (_Europa) favoritos = "$favoritos Salsa";
-      if (_AmericaLatina) favoritos = "$favoritos Rancheras";
-      if (_Asia) favoritos = "$favoritos Rock";
-      var usuario = Usuario(
-          _name.text, _email.text, _password.text, genre, favoritos, _date);
-      saveUser(usuario);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+      if (_Europa) favoritos = "$favoritos Europa";
+      if (_AmericaLatina) favoritos = "$favoritos AmericaLatina";
+      if (_Asia) favoritos = "$favoritos Asia";
+      var user = Usuario("", _name.text, _email.text, _password.text, genre,
+          favoritos, _date);
+      _registerUser(user);
       } else {
         _showMsg("Las contraseñas deben de ser iguales");
       }
-
-
     });
   }
 
@@ -231,15 +246,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextButton.styleFrom(
                         textStyle: const TextStyle(fontSize: 16),
                       ),
-                      onPressed: () async{
-                        String usu= _email.text;
-                        String cla=_password.text;
-                        final datos= await usuarioFirebase.registrarusuario(usu, cla);
-                        if(datos=='ok'){
-                          Fluttertoast.showToast(msg: "datos registrados", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.TOP);
-                        }
+                      onPressed: () {
                         _onRegisterButtonClicked();
-
                       },
                       child: const Text("Registrar"),
                     ),
