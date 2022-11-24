@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mi_musica/models/sitios.dart';
 
+<<<<<<< HEAD
 import '../repository/usuarioFirebase.dart';
 
 
+=======
+import '../repository/usuariofirebase.dart';
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
 
 class NewSitePage extends StatefulWidget {
   const NewSitePage({Key? key}) : super(key: key);
@@ -16,6 +20,7 @@ class NewSitePage extends StatefulWidget {
 class _NewSitePageState extends State<NewSitePage> {
   final UsuarioFirebase _usuarioFirebase = UsuarioFirebase();
 
+<<<<<<< HEAD
   final _nameSite = TextEditingController();
   final _town = TextEditingController();
   final _generalDescription = TextEditingController();
@@ -24,6 +29,11 @@ class _NewSitePageState extends State<NewSitePage> {
   final _latitude = TextEditingController();
   final _longitude = TextEditingController();
   final _photo = TextEditingController();
+=======
+  final _name = TextEditingController();
+  final _location = TextEditingController();
+  final _description = TextEditingController();
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
 
   double _rating = 3.0;
 
@@ -39,7 +49,11 @@ class _NewSitePageState extends State<NewSitePage> {
       ),
     );
   }
+<<<<<<< HEAD
   void _createSitio(Site sitio) async{
+=======
+  void _createSitio(Sitios sitio) async{
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
     var result = await _usuarioFirebase.createSitio(sitio);
     _showMsg(result);
     Navigator.pop(context);
@@ -52,11 +66,18 @@ class _NewSitePageState extends State<NewSitePage> {
     if (_historicos) genres = "$genres Históricos";
     if (_religiosos) genres = "$genres Religiosos";
     if (_romance) genres = "$genres Románticos";
+<<<<<<< HEAD
     var sitio = Site("", _nameSite.text, _generalDescription.text, _town.text, _department.text, _detailedDescription.text, _latitude.text, _longitude.text, genres, _photo.text, _rating.toDouble() );
     _createSitio(sitio);
   }
 
 
+=======
+    var sitio = Sitios("", _name.text, _location.text, _description.text, _rating, genres);
+    _createSitio(sitio);
+  }
+
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
     @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +91,11 @@ class _NewSitePageState extends State<NewSitePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+<<<<<<< HEAD
                 controller: _nameSite,
+=======
+                controller: _name,
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Nombre'),
                 keyboardType: TextInputType.text,
@@ -79,12 +104,17 @@ class _NewSitePageState extends State<NewSitePage> {
                 height: 16.0,
               ),
               TextFormField(
+<<<<<<< HEAD
                 controller: _department,
+=======
+                controller: _location,
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Localización'),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
+<<<<<<< HEAD
                 height: 12.0,
               ),
 
@@ -93,11 +123,18 @@ class _NewSitePageState extends State<NewSitePage> {
               ),
               TextFormField(
                 controller: _detailedDescription,
+=======
+                height: 16.0,
+              ),
+              TextFormField(
+                controller: _description,
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Descripción'),
                 keyboardType: TextInputType.text,
               ),
+<<<<<<< HEAD
               TextFormField(
                 controller: _photo,
                 decoration: const InputDecoration(
@@ -107,6 +144,8 @@ class _NewSitePageState extends State<NewSitePage> {
                 keyboardType: TextInputType.text,
 
               ),
+=======
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
               const SizedBox(
                 height: 16.0,
               ),

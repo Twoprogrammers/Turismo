@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'login_page.dart';
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
 import 'new_Site_page.dart';
 
 class MySitePage extends StatefulWidget {
@@ -44,7 +48,11 @@ class _MySitePageState extends  State<MySitePage> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const NewSitePage()));
           },
+<<<<<<< HEAD
           tooltip: 'Nuevo Lugar',
+=======
+          tooltip: 'New Book',
+>>>>>>> c3efb2251ce6bbca656782e8eb8decb5c8dcfce2
           child: const Icon(Icons.add)),
     );
   }
