@@ -1,32 +1,41 @@
 import 'package:flutter/material.dart';
 
 class Usuario{
+  var _uid;
   var _name;
   var _email;
   var _password;
   var _genre;
-  var _favoritesGenres;
+  var _favoritesLugares;
   var _bornDate;
 
-  Usuario(this._name, this._email, this._password, this._genre,
-      this._favoritesGenres, this._bornDate);
+  Usuario(this._uid,this._name, this._email, this._password, this._genre,
+      this._favoritesLugares, this._bornDate);
 
   Usuario.Empty();
 
+  get uid => _uid;
+
+  set uid(value) {
+    _uid = value;
+  }
+
   Usuario.fromJson(Map<String, dynamic> json)
-      : _name = json["name"],
+      : _uid = json['uid'],
+        _name = json["name"],
         _email = json["email"],
         _password = json["password"],
         _genre = json["genre"],
-        _favoritesGenres = json["favoritesGenres"],
+        _favoritesLugares = json["favoritesLugares"],
         _bornDate = json["bornDate"];
 
   Map<String, dynamic> ToJson() => {
+    'uid': _uid,
     "name" : _name,
     "email" : _email,
     "password" : _password,
     "genre" : _genre,
-    "favoritesGenres" : _favoritesGenres,
+    "favoritesGenres" : _favoritesLugares,
     "bornDate" : _bornDate
   };
 
@@ -44,10 +53,10 @@ class Usuario{
     _bornDate = value;
   }
 
-  get favoritesGenres => _favoritesGenres;
+  get favoritesLugares => _favoritesLugares;
 
-  set favoritesGenres(value) {
-    _favoritesGenres = value;
+  set favoritesLugares(value) {
+    _favoritesLugares = value;
   }
 
   get genre => _genre;

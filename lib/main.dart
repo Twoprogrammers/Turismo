@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mi_musica/pages/login_page.dart';
+import 'package:mi_musica/pages/mi_sitios_page.dart';
 import 'package:mi_musica/pages/register_page.dart';
 import 'package:mi_musica/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Mis Canciones",
+      title: "Mis Sitios Turísticos",
       localizationsDelegates: const[
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAHoGSfB4vr8LZwxyQyBXo6x22JcbbOQRU',
-    appId: '1:13897214364:android:a7147171d0d1cadb7c0059',
-    messagingSenderId: '13897214364',
-    projectId: 'baseusuarios-3f54b',
-    storageBucket: 'baseusuarios-3f54b.appspot.com',
+    apiKey: 'AIzaSyCj9UpGHTV_VYbxgHGLErL2Vik9RhIKHrg',
+    appId: '1:827825755729:android:dc6feae3dc6d2c99d40a70',
+    messagingSenderId: '827825755729',
+    projectId: 'baseusuarios-861af',
+    storageBucket: 'baseusuarios-861af.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDtPSRhKvc3-vpKSGIHmrasyzRa8yjRzdU',
-    appId: '1:13897214364:ios:35ae769fd8fd74547c0059',
-    messagingSenderId: '13897214364',
-    projectId: 'baseusuarios-3f54b',
-    storageBucket: 'baseusuarios-3f54b.appspot.com',
-    iosClientId: '13897214364-8k0n0ti25heiqa47f4h5dbi7itr82b01.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD8rMLL0cFz1iPRiZcxVlC7ZNLkz08Bh1M',
+    appId: '1:827825755729:ios:f811d046470d9641d40a70',
+    messagingSenderId: '827825755729',
+    projectId: 'baseusuarios-861af',
+    storageBucket: 'baseusuarios-861af.appspot.com',
+    iosClientId: '827825755729-mkd8j8je5u8129tk9pjum89gu7853gr0.apps.googleusercontent.com',
     iosBundleId: 'com.example.miMusica',
   );
 }
